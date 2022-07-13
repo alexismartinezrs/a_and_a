@@ -56,7 +56,7 @@
                             </ul>
                             <ul class="member-actions">
                                 <li><a href="#map" class="login">LUGAR</a></li>
-                                <li><a href="#rsvp" class="btn-white btn-small">CONFIRMACION</a></li>
+                                <li><a href="#rsvp" class="btn-white btn-small invitacion">CONFIRMACION</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row invitacion">
                 <div class="col-sm-4 hidden-xs"></div>
                 <div class="col-sm-4 hidden-xs text-center"><a href="#rsvp"
                         class="btn btn-accent btn-large rsvp-btn">RSVP</a></div>
@@ -402,7 +402,7 @@
         </div>
     </section>
 
-    <section class="rsvp text-center" id="rsvp">
+    <section class="rsvp text-center invitacion" id="rsvp">
 
         <div id="rsvp-modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -411,8 +411,8 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span>
                         </button>
                         <div class="section-padding">
-                            <h3>Thank you!</h3>
-                            <p>We are glad to see you join us on our big day.</p>
+                            <h3>Muchas gracias por tu confirmacion!</h3>
+                            <p>Estaremos muy felices de verte en nuestro gran dia!</p>
                             <div id="add-to-cal"></div>
                         </div>
                     </div>
@@ -420,47 +420,24 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
-        <div class="container">
+        <div class="container ">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <h3>Que estas esperando?</h3>
+                    <h3>CONFIRMACION</h3>
+                    <p><b id="invName">ROGELIO CARRILLO</b></p>
+                    <p>Esta invitacion es para <b id="invPersonas">2</b> personas</p>
                     <p>Estaremos profundamente agradecidos si nos ayudas con tu confirmacion antes del 17 de Julio</p>
                     <form id="rsvp-form" class="rsvp-form" action="" method="POST">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-input-group">
-                                    <i class="fa fa-envelope"></i><input type="email" name="email" class=""
-                                        placeholder="Correo" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-input-group">
-                                    <i class="fa fa-user"></i><input name="name" class="" placeholder="Nombre"
-                                        required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-input-group">
-                                    <i class="fa fa-users"></i><input type="number" name="extras" class="" min="0"
-                                        max="4" placeholder="Personas" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-input-group">
-                                    <i class="fa fa-key"></i><input type="number" name="invite_code" id="invite_code"
-                                        class="" min="0" placeholder="Codigo Invitacion" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
+          
+                        <div id="qrcode"></div>
+                        <p>Presenta este codigo en la recepcion</p>
+                        <div class="row" style="padding-top: 30px;">
                             <div class="col-md-12" id="alert-wrapper"></div>
                         </div>
                         <button class="btn-fill rsvp-btn">
-                            Yes,
-                            that's me!
+                            Click aqui para confirmar tu asistencia
                         </button>
+
                     </form>
                 </div>
             </div>
@@ -521,6 +498,14 @@
             width: 90%;
             margin-bottom: 12%;
         }
+
+        #qrcode > canvas {
+  display: block; /* Required to allow centering of the canvas */
+  margin: 0 auto;
+}
+#qrcode > img {
+  margin: 0 auto;
+}
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
@@ -531,6 +516,11 @@
     <script src="node_modules/waypoints/lib/jquery.waypoints.min.js"></script>
     <script src="js/vendor/ouical.js"></script>
     <script src="js/scripts.min.js"></script>
+    <script src="js/qrcode.js"></script>
+ 
+    <script src="invitaciones.js"></script>
+    <script src="js/invitacioncheck.js"></script>
+    
 
     <!-- Google Analytics -->
 
