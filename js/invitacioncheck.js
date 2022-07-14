@@ -18,7 +18,6 @@ function PullInvitados(){
         console.log('error');
     }
     else{
-        console.log(e.data)
         invitaciones = e.data;
         Invitacion = UrlCode();
         if (Invitacion.code == '500') {
@@ -31,11 +30,11 @@ function PullInvitados(){
             $('#invName').text(Invitacion.nombre);
             $('#invPersonas').text(Invitacion.personas);
 
-
-            console.log(Invitacion);
             if(Invitacion.confirmaciones>0){
                 console.log('esconder');
                 $('#btnConfirmar').hide();
+                $('#msgconfirmacion').hide()
+                $('#lblconfirmacion').text('YA TENEMOS REGISTRADA TU CONFIRMACION, GRACIAS<3')
             }
             else{
                 $('#btnConfirmar').show();
