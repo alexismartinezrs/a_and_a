@@ -98,11 +98,27 @@
     <section id="invitadoslista" class="section-padding">
 
         <div class="container">
-            <div class="row" style="text-align:center;">
-                <textarea id="urlcustom" rows="7" cols="80" name="description" style="color:black;font-weight:500">
+            <div class="row">
 
-                 </textarea><br>
-                <div id="copiarurl" class="btn">COPIAR URL</div>
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    <textarea id="urlcustom" rows="7" cols="80" name="description" style="color:black;font-weight:500">
+
+                    </textarea><br>
+                    <div id="copiarurl" class="btn">COPIAR URL</div>
+                </div>
+                <div class="col-md-10 col-md-offset-1">
+                    <p>Total Invitaciones: <i id="ttlinv">0</i><br>
+                        Total Personas:<i id="ttlp">0</i><br>
+                        Personas Confirmadas:<i id="ttlc">0</i></p><br>
+                </div>
+                <div class="col-md-10 col-md-offset-1">
+
+                    <button id="btnConfirmados" class="btn">FILTRAR CONFIRMADOS</button>
+                    <button id="btnPendientes" class="btn">FILTRAR PENDIENTES</button>
+                    <button id="btnRemoverFiltros" class="btn">QUITAR FILTROS</button>
+
+                </div>
+
                 <div class="col-md-10 col-md-offset-1">
                     <table id="tblinvitados" class="table table-striped table-bordered Display" style="width:100%">
                     </table>
@@ -114,6 +130,11 @@
 
 
     <style>
+        i {
+            color: black;
+            font-weight: 700;
+        }
+
         .fixed {
             position: fixed;
             background-color: hsl(218deg 50% 35% / 73%);
@@ -211,7 +232,7 @@
             $('#copiarurl').on('click', function () {
                 var data = table.row({ selected: true }).data();
 
-                if (data != undefined && table !=undefined) {
+                if (data != undefined && table != undefined) {
                     let copyText = document.querySelector("#urlcustom");
                     copyText.select();
                     document.execCommand("copy");
@@ -231,23 +252,34 @@
                     console.log('error');
                 }
                 else {
-                    datos.forEach(element => {
-                        element.URL = 'https://alexismartinezrs.github.io/a_and_a/?code=' + element.code;
+
+                    var totales = { totalinvitaciones: 0, personas: 0, confirmadas: 0 }
+                    datos = datos.filter(e => e.nombre != 'INVALID' && e.nombre != '"nombre"');
+
+                    datos.forEach(el => {
+                        el.URL = 'https://alexismartinezrs.github.io/a_and_a/?code=' + el.code;
+                        el.confirmaciones = el.confirmaciones > 0 ? 'Y' : 'N';
+                        totales.totalinvitaciones++;
+                        totales.personas += el.personas;
+                        totales.confirmadas += el.confirmaciones == 'Y' ? el.personas : 0;
                     });
-                    var resultados = datos.filter(e => e.nombre != 'INVALID' && e.nombre != '"nombre"');
+
+                    $('#ttlinv').text(totales.totalinvitaciones);
+                    $('#ttlp').text(totales.personas);
+                    $('#ttlc').text(totales.confirmadas);
+
                     table = $('#tblinvitados').DataTable(
                         {
-                            data: resultados,
-                            dom: 'lftrip',
-                            scrollY: "60vh",
+                            data: datos,
+                            dom: "<'row'<'col-sm-6'f>>" +
+                                "<'row'<'col-sm-12'tr>>" +
+                                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                             ordering: true,
+                            scrollY: '40vh',
                             scrollCollapse: true,
+                            paging: false,
                             sScrollX: "100%",
-
                             select: true,
-
-
-
                             columns: [
                                 { data: 'code', title: 'CODIGO' },
                                 { data: 'nombre', title: 'NOMBRE' },
@@ -283,6 +315,18 @@
                         .on('deselect', function (e, dt, type, indexes) {
                             $('#urlcustom').val('');
                         });
+
+                    $('#btnConfirmados').on('click', function () {
+                        table.columns(3).search('Y').draw();
+                    })
+                    $('#btnPendientes').on('click', function () {
+                        table.columns(3).search('N').draw();
+                    })
+                    $('#btnRemoverFiltros').on('click', function () {
+                        $('.form-control.form-control-sm').val('');
+                        table.search('');
+                        table.columns().search('').draw();
+                    })
 
                 }
 
