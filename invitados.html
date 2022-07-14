@@ -209,7 +209,8 @@
                 if (data != undefined) {
 
                     var url = data.URL;
-                    navigator.clipboard.writeText('Nos gustaría que fueras parte de nuestra boda, aquí tienes tu invitacion, nos ayudas mucho confirmando tu asistencia :)  '+ url);
+                    navigator.clipboard.writeText(url);
+                   
 
                     alert("Copiado: Invitacion de: "+ data.nombre+ ' Codigo:' + data.code);
                 }
