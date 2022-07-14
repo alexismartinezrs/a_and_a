@@ -424,8 +424,8 @@
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <h3>CONFIRMACION</h3>
-                    <p><b id="invName">ROGELIO CARRILLO</b></p>
-                    <p>Esta invitacion es para <b id="invPersonas">2</b> personas</p>
+                    <p><b id="invName"></b></p>
+                    <p>Esta invitacion es para <b id="invPersonas"></b> personas</p>
                     <p>Estaremos profundamente agradecidos si nos ayudas con tu confirmacion antes del 17 de Julio</p>
                     <form id="rsvp-form" class="rsvp-form" action="" method="POST">
           
@@ -434,7 +434,7 @@
                         <div class="row" style="padding-top: 30px;">
                             <div class="col-md-12" id="alert-wrapper"></div>
                         </div>
-                        <button class="btn-fill rsvp-btn">
+                        <button id="btnConfirmar" class="btn-fill rsvp-btn">
                             Click aqui para confirmar tu asistencia
                         </button>
 
@@ -505,6 +505,9 @@
 }
 #qrcode > img {
   margin: 0 auto;
+}
+.invitacion{
+    display: none;
 }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
